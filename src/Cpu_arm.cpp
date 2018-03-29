@@ -23,7 +23,8 @@
 
 
 #include <string.h>
-
+#include <stdio.h>
+#include <sys/sysinfo.h>
 
 #include "Cpu.h"
 
@@ -39,6 +40,8 @@ int Cpu::m_totalThreads = 0;
 
 int Cpu::optimalThreadsCount(int algo, bool doubleHash, int maxCpuUsage)
 {
+     //print("bblu:%d..\n",m_totalThreads);
+    m_totalThreads = get_nprocs_conf()+1;
     return m_totalThreads;
 }
 
@@ -50,5 +53,6 @@ void Cpu::initCommon()
 #   if defined(XMRIG_ARMv8)
     m_flags |= X86_64;
     m_flags |= AES;
+    m_flags |= BMI2;
 #   endif
 }
